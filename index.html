@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Oldache Oussama Nazim | Marine Geosciences & Coastal Engineering</title>
+
+    <meta name="description"
+          content="Portfolio of Oldache Oussama Nazim, Marine Geosciences and Coastal Engineering graduate specialized in GIS, remote sensing, bathymetry and coastal modelling.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8fa;
+            color: #17202a;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            border-bottom: 1px solid #ddd;
+            z-index: 1000;
+        }
+
+        nav .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: bold;
+            color: #006994;
+            font-size: 20px;
+        }
+
+        nav a {
+            color: #17202a;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #008cba;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #003b5c, #007c91);
+            color: white;
+            padding: 100px 25px 60px;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h2 {
+            font-size: clamp(20px, 3vw, 30px);
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            font-size: 18px;
+            opacity: 0.92;
+            margin-bottom: 30px;
+        }
+
+        .buttons a {
+            display: inline-block;
+            padding: 12px 22px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: white;
+            color: #006994;
+        }
+
+        .secondary {
+            border: 1px solid white;
+            color: white;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        section h2 {
+            font-size: 34px;
+            color: #005b78;
+            margin-bottom: 30px;
+        }
+
+        .about-text {
+            max-width: 850px;
+            font-size: 17px;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e1e7eb;
+        }
+
+        .skill-card h3 {
+            color: #006994;
+            margin-bottom: 10px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project {
+            background: white;
+            padding: 28px;
+            border-radius: 10px;
+            border: 1px solid #e1e7eb;
+            transition: transform 0.2s;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+        }
+
+        .project h3 {
+            color: #006994;
+            margin-bottom: 12px;
+        }
+
+        .project p {
+            margin-bottom: 18px;
+        }
+
+        .project a {
+            color: #007c91;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact {
+            background: #eaf3f6;
+            max-width: none;
+        }
+
+        .contact-inner {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 25px;
+        }
+
+        .contact a {
+            color: #006994;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #003b5c;
+            color: white;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            nav .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .hero {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container">
+        <div class="logo">Oussama Nazim</div>
+
+        <div>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+
+        <h1>Oldache Oussama Nazim</h1>
+
+        <h2>
+            Marine Geosciences & Coastal Engineering
+        </h2>
+
+        <p>
+            Marine geosciences graduate interested in coastal engineering,
+            GIS, remote sensing, satellite-derived bathymetry,
+            marine environmental analysis and numerical modelling.
+        </p>
+
+        <div class="buttons">
+            <a class="primary" href="#projects">View Projects</a>
+            <a class="secondary"
+               href="https://github.com/oldache-oussamanazim"
+               target="_blank">
+                GitHub
+            </a>
+        </div>
+
+    </div>
+</header>
+
+<section id="about">
+
+    <h2>About Me</h2>
+
+    <div class="about-text">
+
+        <p>
+            I am a graduate in Marine Geosciences and Coastal Engineering
+            from USTHB, with a background in applied geology.
+        </p>
+
+        <br>
+
+        <p>
+            My interests include coastal processes, sediment transport,
+            bathymetry, marine environmental assessment, remote sensing
+            and geospatial analysis.
+        </p>
+
+        <br>
+
+        <p>
+            I work with field data, satellite imagery and numerical or
+            statistical approaches to investigate marine and coastal systems.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="skills">
+
+    <h2>Technical Skills</h2>
+
+    <div class="skills">
+
+        <div class="skill-card">
+            <h3>GIS & Geospatial</h3>
+            <p>
+                ArcGIS Pro, QGIS, spatial analysis,
+                cartography and geospatial data processing.
+            </p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Remote Sensing</h3>
+            <p>
+                Sentinel-2, Google Earth Engine,
+                ESA SNAP and satellite image analysis.
+            </p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Programming & Data</h3>
+            <p>
+                Python, MATLAB, statistical analysis,
+                machine learning and data processing.
+            </p>
+        </div>
+
+        <div class="skill-card">
+            <h3>Coastal Modelling</h3>
+            <p>
+                SWAN, Delft3D, wave modelling,
+                sediment transport and coastal processes.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="projects">
+
+    <h2>Selected Projects</h2>
+
+    <div class="projects">
+
+        <div class="project">
+
+            <h3>Satellite-Derived Bathymetry</h3>
+
+            <p>
+                Sentinel-2 based bathymetry using empirical methods
+                including Stumpf and Lyzenga, combined with
+                Random Forest and spatial validation.
+            </p>
+
+            <a href="https://github.com/oldache-oussamanazim/satellite-derived-bathymetry"
+               target="_blank">
+                View project →
+            </a>
+
+        </div>
+
+        <div class="project">
+
+            <h3>Marine Pollution — Bay of Algiers</h3>
+
+            <p>
+                Coupled analysis of physico-chemical measurements
+                and Sentinel-2 remote sensing for marine pollution
+                and water-quality spatial assessment.
+            </p>
+
+            <a href="https://github.com/oldache-oussamanazim/marine-pollution-algiers"
+               target="_blank">
+                View project →
+            </a>
+
+        </div>
+
+        <div class="project">
+
+            <h3>Coastal Engineering Modelling</h3>
+
+            <p>
+                Numerical modelling and analysis of waves,
+                sediment transport, hydrodynamics and
+                coastal processes using engineering tools.
+            </p>
+
+            <a href="https://github.com/oldache-oussamanazim/coastal-engineering-modelling"
+               target="_blank">
+                View project →
+            </a>
+
+        </div>
+
+        <div class="project">
+
+            <h3>Coastal Change & GIS</h3>
+
+            <p>
+                GIS-based analysis of shoreline evolution,
+                coastal change and spatial characteristics
+                of coastal environments.
+            </p>
+
+            <a href="https://github.com/oldache-oussamanazim/coastal-change-gis"
+               target="_blank">
+                View project →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contact" class="contact">
+
+    <div class="contact-inner">
+
+        <h2>Contact</h2>
+
+        <p>
+            I am currently open to professional opportunities
+            related to marine geosciences, coastal engineering,
+            GIS, remote sensing and environmental analysis.
+        </p>
+
+        <br>
+
+        <p>
+            GitHub:
+            <a href="https://github.com/oldache-oussamanazim"
+               target="_blank">
+                github.com/oldache-oussamanazim
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 Oldache Oussama Nazim — Marine Geosciences & Coastal Engineering
+</footer>
+
+</body>
+  </html>
