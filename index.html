@@ -216,20 +216,86 @@ body {
         }
 
         @media (max-width: 700px) {
-            nav .container {
-                flex-direction: column;
-                gap: 10px;
-            }
 
-            nav a {
-                margin-left: 10px;
-                margin-right: 10px;
-            }
+    nav {
+        position: relative;
+    }
 
-            .hero {
-                text-align: center;
-            }
-        }
+    nav .container {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px 12px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    nav .container > div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px 10px;
+    }
+
+    nav a {
+        margin: 0;
+        font-size: 13px;
+        padding: 4px 2px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding: 70px 20px 50px;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero h2 {
+        font-size: 21px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+    section h2 {
+        font-size: 29px;
+    }
+
+    .skills,
+    .projects {
+        grid-template-columns: 1fr;
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .buttons a {
+        margin: 0;
+        text-align: center;
+    }
+
+    .contact-links {
+        flex-direction: column;
+    }
+
+    .contact-links a {
+        text-align: center;
+    }
+}
+        
         .tech-tags {
     display: flex;
     flex-wrap: wrap;
