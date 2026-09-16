@@ -245,6 +245,31 @@ body {
     font-size: 14px;
     font-weight: 600;
 }
+        
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.contact-links a {
+    display: inline-block;
+    padding: 12px 20px;
+    background: white;
+    color: #005b78;
+    border: 1px solid #d5e2e7;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-links a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 59, 92, 0.12);
+}
+        
     </style>
 </head>
 
@@ -651,20 +676,28 @@ body {
         <h2>Contact</h2>
 
         <p>
-            I am currently open to professional opportunities
-            related to marine geosciences, coastal engineering,
-            GIS, remote sensing and environmental analysis.
+            I am currently open to professional opportunities in
+            marine geosciences, coastal engineering, GIS, remote sensing
+            and marine environmental analysis.
         </p>
 
-        <br>
+        <div class="contact-links">
 
-        <p>
-            GitHub:
+            <a href="mailto:oldache.oussamanazim@gmail.com">
+                📧 Email
+            </a>
+
+            <a href="https://www.linkedin.com/in/oldache-oussama-nazim-4210b6266"
+               target="_blank">
+                💼 LinkedIn
+            </a>
+
             <a href="https://github.com/oldache-oussamanazim"
                target="_blank">
-                github.com/oldache-oussamanazim
+                💻 GitHub
             </a>
-        </p>
+
+        </div>
 
     </div>
 
