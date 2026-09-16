@@ -269,6 +269,21 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(0, 59, 92, 0.12);
 }
+
+.hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.hero-tags span {
+    padding: 7px 13px;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
         
     </style>
 </head>
@@ -298,7 +313,11 @@ body {
         <h2>
             Marine Geosciences & Coastal Engineering
         </h2>
-
+<div class="hero-tags">
+    <span>Marine Geosciences</span>
+    <span>Coastal Engineering</span>
+    <span>Remote Sensing</span>
+</div>
         <p>
             Marine geosciences graduate interested in coastal engineering,
             GIS, remote sensing, satellite-derived bathymetry,
