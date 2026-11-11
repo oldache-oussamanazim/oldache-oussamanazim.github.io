@@ -7,7 +7,10 @@
     <title>Oldache Oussama Nazim | Marine Geosciences & Coastal Engineering</title>
 
     <meta name="description"
-          content="Portfolio of Oldache Oussama Nazim, Marine Geosciences and Coastal Engineering graduate specialized in GIS, remote sensing, bathymetry and coastal modelling.">
+          content="Portfolio of Oldache Oussama Nazim, Marine Geosciences and Coastal Engineering specialist in GIS, remote sensing, bathymetry, and coastal modeling.">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         * {
@@ -20,337 +23,368 @@
             scroll-behavior: smooth;
         }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f7fafc;
-    color: #17202a;
-    line-height: 1.7;
-}
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background: #f4f8fa;
+            color: #1e293b;
+            line-height: 1.7;
+        }
 
+        /* --- Navigation --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
-            border-bottom: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
             z-index: 1000;
         }
 
         nav .container {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: auto;
-            padding: 18px 25px;
+            padding: 16px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-weight: bold;
-            color: #006994;
-            font-size: 20px;
+            font-weight: 700;
+            color: #005b78;
+            font-size: 21px;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         nav a {
-            color: #17202a;
+            color: #334155;
             text-decoration: none;
-            margin-left: 25px;
+            margin-left: 22px;
             font-size: 14px;
+            font-weight: 600;
+            transition: color 0.2s ease;
         }
 
         nav a:hover {
-            color: #008cba;
+            color: #007c91;
         }
 
+        /* --- Hero Section --- */
         .hero {
-            min-height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #003b5c, #007c91);
+            background: linear-gradient(135deg, #002b49 0%, #005b78 60%, #007c91 100%);
             color: white;
-            padding: 100px 25px 60px;
+            padding: 120px 25px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 0%, transparent 40%);
+            pointer-events: none;
         }
 
         .hero-content {
-            max-width: 1100px;
+            max-width: 1150px;
             width: 100%;
             margin: auto;
         }
 
         .hero h1 {
-            font-size: clamp(40px, 7vw, 72px);
+            font-size: clamp(38px, 6vw, 68px);
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
         .hero h2 {
-            font-size: clamp(20px, 3vw, 30px);
-            font-weight: normal;
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 400;
             margin-bottom: 20px;
+            color: #b0e0e6;
         }
 
         .hero p {
-            max-width: 700px;
+            max-width: 720px;
             font-size: 18px;
             opacity: 0.92;
+            margin-bottom: 28px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
             margin-bottom: 30px;
         }
 
-        .buttons a {
-    display: inline-block;
-    padding: 13px 24px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
+        .hero-tags span {
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
 
-.buttons a:hover {
-    transform: translateY(-2px);
-    opacity: 0.9;
-}
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
 
         .primary {
-            background: white;
-            color: #006994;
+            background: #ffffff;
+            color: #005b78;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+
+        .primary:hover {
+            transform: translateY(-2px);
+            background: #f8fafc;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
 
         .secondary {
-            border: 1px solid white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
             color: white;
+            background: rgba(255, 255, 255, 0.05);
         }
 
+        .secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: white;
+        }
+
+        /* --- Sections Layout --- */
         section {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: auto;
             padding: 90px 25px;
         }
 
         section h2 {
-            font-size: 34px;
-            color: #005b78;
-            margin-bottom: 30px;
+            font-size: 32px;
+            color: #003b5c;
+            margin-bottom: 32px;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 45%;
+            height: 4px;
+            background: #007c91;
+            border-radius: 2px;
         }
 
         .about-text {
-            max-width: 850px;
+            max-width: 900px;
             font-size: 17px;
-        }
-
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-card {
+            color: #334155;
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #e1e7eb;
+            padding: 35px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
-        .skill-card h3 {
-            color: #006994;
-            margin-bottom: 10px;
+        .about-text p + p {
+            margin-top: 18px;
         }
 
-        .projects {
+        /* --- Grid Cards --- */
+        .skills, .projects {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
         }
 
-        .project {
+        .skill-card, .project {
             background: white;
-            padding: 28px;
-            border-radius: 10px;
-            border: 1px solid #e1e7eb;
-            transition: transform 0.2s;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .project:hover {
+        .skill-card:hover, .project:hover {
             transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0, 91, 120, 0.09);
+            border-color: #cbd5e1;
         }
 
-        .project h3 {
-            color: #006994;
+        .skill-card h3, .project h3 {
+            color: #005b78;
+            font-size: 20px;
             margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-badge {
+            align-self: flex-start;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: #e0f2fe;
+            color: #0369a1;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
         }
 
         .project p {
-            margin-bottom: 18px;
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 12px;
         }
 
         .project a {
             color: #007c91;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            transition: gap 0.2s ease;
         }
 
+        .project a:hover {
+            gap: 10px;
+            color: #005b78;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .tech-tag {
+            background: #edf6f9;
+            color: #005b78;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #d4e6ed;
+        }
+
+        /* --- Contact --- */
         .contact {
             background: #eaf3f6;
             max-width: none;
+            border-top: 1px solid #d5e2e7;
         }
 
         .contact-inner {
-            max-width: 1100px;
+            max-width: 1150px;
             margin: auto;
             padding: 0 25px;
         }
 
-        .contact a {
-            color: #006994;
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 22px;
+            background: white;
+            color: #005b78;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .contact-links a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 59, 92, 0.1);
+            border-color: #005b78;
         }
 
         footer {
             text-align: center;
             padding: 30px;
-            background: #003b5c;
+            background: #002b49;
             color: white;
             font-size: 14px;
+            opacity: 0.95;
         }
 
-        @media (max-width: 700px) {
-
-    nav {
-        position: relative;
-    }
-
-    nav .container {
-        flex-direction: column;
-        gap: 12px;
-        padding: 15px 12px;
-    }
-
-    .logo {
-        font-size: 18px;
-    }
-
-    nav .container > div:last-child {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px 10px;
-    }
-
-    nav a {
-        margin: 0;
-        font-size: 13px;
-        padding: 4px 2px;
-    }
-
-    .hero {
-        min-height: auto;
-        padding: 70px 20px 50px;
-        text-align: center;
-    }
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero h2 {
-        font-size: 21px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    section {
-        padding: 60px 20px;
-    }
-
-    section h2 {
-        font-size: 29px;
-    }
-
-    .skills,
-    .projects {
-        grid-template-columns: 1fr;
-    }
-
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-    }
-
-    .buttons a {
-        margin: 0;
-        text-align: center;
-    }
-
-    .contact-links {
-        flex-direction: column;
-    }
-
-    .contact-links a {
-        text-align: center;
-    }
-}
-        
-        .tech-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 25px;
-}
-
-.tech-tag {
-    background: #eaf3f6;
-    color: #005b78;
-    padding: 7px 13px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-}
-        
-.contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.contact-links a {
-    display: inline-block;
-    padding: 12px 20px;
-    background: white;
-    color: #005b78;
-    border: 1px solid #d5e2e7;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.contact-links a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 59, 92, 0.12);
-}
-
-.hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 22px;
-}
-
-.hero-tags span {
-    padding: 7px 13px;
-    border: 1px solid rgba(255,255,255,0.45);
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 600;
-}
-        
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            nav { position: relative; }
+            nav .container {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px 20px;
+            }
+            nav .container > div:last-child {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px 12px;
+            }
+            nav a { margin: 0; font-size: 13px; }
+            .hero {
+                min-height: auto;
+                padding: 60px 20px;
+                text-align: center;
+            }
+            .hero-tags, .buttons {
+                justify-content: center;
+            }
+            .buttons { flex-direction: column; width: 100%; }
+            .buttons a { justify-content: center; width: 100%; }
+            section { padding: 60px 20px; }
+            .skills, .projects { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 
@@ -358,8 +392,7 @@ body {
 
 <nav>
     <div class="container">
-        <div class="logo">Oussama Nazim</div>
-
+        <div class="logo"><i class="fa-solid fa-water"></i> Oussama Nazim</div>
         <div>
             <a href="#about">About</a>
             <a href="#education">Education</a>
@@ -373,419 +406,262 @@ body {
 
 <header class="hero">
     <div class="hero-content">
-
         <h1>Oldache Oussama Nazim</h1>
+        <h2>Marine Geosciences & Coastal Engineering</h2>
+        
+        <div class="hero-tags">
+            <span><i class="fa-solid fa-compass"></i> Marine Geosciences</span>
+            <span><i class="fa-solid fa-water"></i> Coastal Engineering</span>
+            <span><i class="fa-solid fa-satellite"></i> Remote Sensing</span>
+            <span><i class="fa-solid fa-layer-group"></i> GIS & Bathymetry</span>
+        </div>
 
-        <h2>
-            Marine Geosciences & Coastal Engineering
-        </h2>
-<div class="hero-tags">
-    <span>Marine Geosciences</span>
-    <span>Coastal Engineering</span>
-    <span>Remote Sensing</span>
-</div>
         <p>
-            Marine geosciences graduate interested in coastal engineering,
-            GIS, remote sensing, satellite-derived bathymetry,
-            marine environmental analysis and numerical modelling.
+            Marine geosciences and coastal engineering specialist focused on coastal dynamics, 
+            GIS analysis, remote sensing, satellite-derived bathymetry, marine environmental assessment, and numerical modeling.
         </p>
 
-<div class="buttons">
-    <a class="primary" href="#projects">View Projects</a>
-
-    <a class="secondary"
-       href="CV_Oldache_Oussama_Nazim_EN.pdf"
-       target="_blank">
-        🇬🇧 CV English
-    </a>
-
-    <a class="secondary"
-       href="CV_Oldache_Oussama_Nazim_FR.pdf"
-       target="_blank">
-        🇫🇷 CV Français
-    </a>
-
-    <a class="secondary"
-       href="https://github.com/oldache-oussamanazim"
-       target="_blank">
-        GitHub
-    </a>
-    
-    <a class="secondary"
-   href="https://www.linkedin.com/in/oldache-oussama-nazim-4210b6266"
-   target="_blank">
-    LinkedIn
-</a>
-    
-</div>
-
+        <div class="buttons">
+            <a class="primary" href="#projects"><i class="fa-solid fa-briefcase"></i> View Projects</a>
+            <a class="secondary" href="CV_Oldache_Oussama_Nazim_EN.pdf" target="_blank">
+                🇬🇧 CV English
+            </a>
+            <a class="secondary" href="CV_Oldache_Oussama_Nazim_FR.pdf" target="_blank">
+                🇫🇷 CV Français
+            </a>
+            <a class="secondary" href="https://github.com/oldache-oussamanazim" target="_blank">
+                <i class="fa-brands fa-github"></i> GitHub
+            </a>
+            <a class="secondary" href="https://www.linkedin.com/in/oldache-oussama-nazim-4210b6266" target="_blank">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
+            </a>
+        </div>
     </div>
 </header>
 
 <section id="about">
-
     <h2>About Me</h2>
-
     <div class="about-text">
-
         <p>
-            I am a graduate in Marine Geosciences and Coastal Engineering
-            from USTHB, with a background in Applied Geology.
+            I hold a Master's degree in Marine Geosciences and Coastal Engineering from USTHB, built upon a solid academic foundation in Applied Geology.
         </p>
-
-        <br>
-
         <p>
-            My academic and project experience focuses on coastal and marine
-            environments, with particular interest in coastal processes,
-            sediment dynamics, bathymetry, marine environmental assessment
-            and geospatial analysis.
+            My work integrates field-based surveying operations with satellite remote sensing, geospatial analysis, and numerical hydrodynamics. I specialize in quantifying coastal processes, sediment dynamics, satellite-derived shallow-water bathymetry, and coastal infrastructure monitoring.
         </p>
-
-        <br>
-
         <p>
-            I have worked with field measurements, satellite imagery,
-            GIS and numerical modelling to analyse marine and coastal
-            systems. My technical work includes Sentinel-2 remote sensing,
-            Google Earth Engine, ArcGIS Pro, QGIS, Python, MATLAB,
-            SWAN and Delft3D.
+            My technical toolkit spans Sentinel-2 satellite processing (ESA SNAP, ACOLITE, Google Earth Engine), spatial analysis platforms (ArcGIS Pro, QGIS), custom Python workflows (rasterio, scikit-learn), and coastal modeling suites (SWAN, Delft3D).
         </p>
-
-        <br>
-
         <p>
-            I am currently looking for professional opportunities where I
-            can apply and develop my skills in marine geosciences,
-            coastal engineering, GIS, remote sensing and environmental
-            analysis.
+            I am actively seeking professional engineering, research, and consultancy opportunities in marine geosciences, coastal engineering, hydrography, and remote sensing.
         </p>
-
     </div>
-
 </section>
 
 <section id="skills">
-
     <h2>Technical Skills</h2>
-
     <div class="skills">
-
         <div class="skill-card">
-            <h3>🌊 Marine & Coastal</h3>
+            <h3><i class="fa-solid fa-water"></i> Marine & Coastal</h3>
             <p>
                 Marine Geosciences<br>
                 Coastal Engineering<br>
-                Coastal Processes<br>
-                Sediment Transport<br>
-                Bathymetry<br>
+                Coastal Dynamics & Processes<br>
+                Sediment Transport & Shorelines<br>
+                Shallow Water Bathymetry<br>
                 Coastal Geomorphology
             </p>
         </div>
 
         <div class="skill-card">
-            <h3>🗺️ GIS & Geospatial</h3>
+            <h3><i class="fa-solid fa-map-location-dot"></i> GIS & Geospatial</h3>
             <p>
-                ArcGIS Pro<br>
-                QGIS<br>
-                Spatial Analysis<br>
-                Cartography<br>
-                Geospatial Data Processing
+                ArcGIS Pro & QGIS<br>
+                Spatial Data Modeling<br>
+                Topographic Surveying & Mapping<br>
+                Geospatial Python Pipeline<br>
+                Cartographic Visualization
             </p>
         </div>
 
         <div class="skill-card">
-            <h3>🛰️ Remote Sensing</h3>
+            <h3><i class="fa-solid fa-satellite"></i> Remote Sensing</h3>
             <p>
-                Sentinel-2<br>
+                Sentinel-2 Processing<br>
                 Google Earth Engine<br>
-                ESA SNAP<br>
-                Satellite Image Processing<br>
-                Water & Coastal Indices
+                ESA SNAP & ACOLITE<br>
+                Satellite-Derived Bathymetry<br>
+                Coastal & Water Indices
             </p>
         </div>
 
         <div class="skill-card">
-            <h3>💻 Programming & Data</h3>
+            <h3><i class="fa-solid fa-code"></i> Data & Machine Learning</h3>
             <p>
-                Python<br>
-                MATLAB<br>
-                Statistical Analysis<br>
-                Machine Learning<br>
-                Spatial Validation
+                Python (rasterio, pandas, scipy)<br>
+                MATLAB Programming<br>
+                Statistical & Spatial Modeling<br>
+                Random Forest Classifiers<br>
+                Empirical Model Calibration
             </p>
         </div>
 
         <div class="skill-card">
-            <h3>🌐 Numerical Modelling</h3>
+            <h3><i class="fa-solid fa-chart-line"></i> Numerical Modelling</h3>
             <p>
-                SWAN<br>
-                Delft3D<br>
-                Wave Modelling<br>
-                Hydrodynamics<br>
-                Morphodynamics
+                SWAN Wave Modeling<br>
+                Delft3D Hydrodynamics<br>
+                Wave Propagation Analysis<br>
+                Coastal Morphodynamics<br>
+                Hydrographic Data Integration
             </p>
         </div>
-<div class="tech-tags">
-
-    <span class="tech-tag">Python</span>
-    <span class="tech-tag">MATLAB</span>
-    <span class="tech-tag">ArcGIS Pro</span>
-    <span class="tech-tag">QGIS</span>
-    <span class="tech-tag">Google Earth Engine</span>
-    <span class="tech-tag">ESA SNAP</span>
-    <span class="tech-tag">Sentinel-2</span>
-    <span class="tech-tag">SWAN</span>
-    <span class="tech-tag">Delft3D</span>
-    <span class="tech-tag">Random Forest</span>
-    <span class="tech-tag">Spatial Analysis</span>
-
-</div>
-        
     </div>
 
+    <div class="tech-tags">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">MATLAB</span>
+        <span class="tech-tag">ArcGIS Pro</span>
+        <span class="tech-tag">QGIS</span>
+        <span class="tech-tag">Google Earth Engine</span>
+        <span class="tech-tag">ESA SNAP</span>
+        <span class="tech-tag">Sentinel-2</span>
+        <span class="tech-tag">Topcon GM-52 Total Station</span>
+        <span class="tech-tag">SWAN</span>
+        <span class="tech-tag">Delft3D</span>
+        <span class="tech-tag">Random Forest</span>
+    </div>
 </section>
-    
+
 <section id="education">
-
     <h2>Education</h2>
-
     <div class="skills">
-
         <div class="skill-card">
-            <h3>Master’s Degree — Marine Geosciences & Coastal Engineering</h3>
-            <p>
-                USTHB — Université des Sciences et de la Technologie
-                Houari Boumediene
-            </p>
-            <p>
-                <strong>2024 – 2026</strong>
-            </p>
+            <div>
+                <h3><i class="fa-solid fa-graduation-cap"></i> Master’s Degree</h3>
+                <p><strong>Marine Geosciences & Coastal Engineering</strong></p>
+                <p>USTHB — Université des Sciences et de la Technologie Houari Boumediene</p>
+            </div>
+            <p style="margin-top: 15px; color: #007c91; font-weight: 700;">2024 – 2026</p>
         </div>
 
         <div class="skill-card">
-            <h3>Bachelor’s Degree — Applied Geology</h3>
-            <p>
-                USTHB — Université des Sciences et de la Technologie
-                Houari Boumediene
-            </p>
-            <p>
-                <strong>2021 – 2024</strong>
-            </p>
+            <div>
+                <h3><i class="fa-solid fa-graduation-cap"></i> Bachelor’s Degree</h3>
+                <p><strong>Applied Geology</strong></p>
+                <p>USTHB — Université des Sciences et de la Technologie Houari Boumediene</p>
+            </div>
+            <p style="margin-top: 15px; color: #007c91; font-weight: 700;">2021 – 2024</p>
         </div>
-
     </div>
-
 </section>
 
 <section id="academic-projects">
-
     <h2>Academic Projects</h2>
-
     <div class="projects">
-
         <div class="project">
-            <h3>Final Master's Project</h3>
-
-            <p>
-                <strong>Coupled Physico-Chemical and Remote Sensing
-                Analysis of Marine Pollution in the Bay of Algiers</strong>
-            </p>
-
-            <p>
-                Analysis combining field measurements and Sentinel-2
-                satellite imagery to investigate marine environmental
-                conditions and their spatial distribution.
-            </p>
-
-            <p>
-                <strong>Focus:</strong>
-                Water quality, remote sensing, GIS and statistical analysis.
-            </p>
+            <div>
+                <span class="project-badge">Master Thesis</span>
+                <h3>Marine Pollution — Bay of Algiers</h3>
+                <p>
+                    Coupled physico-chemical and Sentinel-2 satellite remote sensing analysis to map water quality parameters and spatial pollution distributions across the Bay of Algiers.
+                </p>
+                <p><strong>Focus:</strong> Water Quality, Sentinel-2 Optical Indices, In Situ Calibration, Spatial Modeling.</p>
+            </div>
         </div>
 
         <div class="project">
-            <h3>Satellite-Derived Bathymetry</h3>
-
-            <p>
-                Development and evaluation of Sentinel-2 based bathymetric
-                approaches using empirical models and Random Forest.
-            </p>
-
-            <p>
-                <strong>Focus:</strong>
-                Shallow-water bathymetry, machine learning,
-                spatial validation and coastal mapping.
-            </p>
+            <div>
+                <span class="project-badge">Field Engineering Campaign</span>
+                <h3>Tigzirt Coastal Assessment</h3>
+                <p>
+                    On-site coastal engineering survey in Tigzirt combining total station topographic measurement (Topcon GM-52), multi-temporal shoreline change analysis, and assessment of coastal protection structures.
+                </p>
+                <p><strong>Focus:</strong> Topographic Surveying, Shoreline Dynamics, Coastal Protection & Gabion Structures.</p>
+            </div>
         </div>
 
         <div class="project">
-            <h3>Coastal Engineering & Numerical Modelling</h3>
-
-            <p>
-                Academic work involving numerical modelling of waves,
-                hydrodynamics, sediment transport and coastal processes.
-            </p>
-
-            <p>
-                <strong>Tools:</strong>
-                SWAN, Delft3D, GIS, Python and MATLAB.
-            </p>
+            <div>
+                <span class="project-badge">Research Project</span>
+                <h3>Satellite-Derived Bathymetry</h3>
+                <p>
+                    Multi-model shallow water bathymetry extraction combining empirical methods (Stumpf, Lyzenga) with machine learning (Random Forest) validated via spatial block cross-validation.
+                </p>
+                <p><strong>Focus:</strong> Remote Sensing Bathymetry, Machine Learning, Coastal Hydrography.</p>
+            </div>
         </div>
-
     </div>
-
 </section>
-    
+
 <section id="projects">
-
-    <h2>Projects</h2>
-
+    <h2>Projects & Repositories</h2>
     <div class="projects">
-
-<div class="project">
-
-    <h3>Satellite-Derived Bathymetry</h3>
-
-    <p>
-        Sentinel-2 based bathymetric mapping in shallow coastal waters
-        using empirical and machine-learning approaches.
-    </p>
-
-    <p>
-        <strong>Methods:</strong>
-        Stumpf ratio, Lyzenga, Random Forest and spatial validation.
-    </p>
-
-    <p>
-        <strong>Tools:</strong>
-        Sentinel-2, Google Earth Engine, Python and GIS.
-    </p>
-
-    <a href="https://github.com/oldache-oussamanazim/satellite-derived-bathymetry"
-       target="_blank">
-        View project on GitHub →
-    </a>
-
-</div>
-
-<div class="project">
-
-    <h3>Marine Pollution — Bay of Algiers</h3>
-
-    <p>
-        Coupled analysis of physico-chemical measurements and
-        Sentinel-2 remote sensing for the assessment of marine
-        environmental conditions in the Bay of Algiers.
-    </p>
-
-    <p>
-        <strong>Methods:</strong>
-        Remote-sensing indices, spatial analysis and statistical
-        comparison with field observations.
-    </p>
-
-    <p>
-        <strong>Tools:</strong>
-        Sentinel-2, Google Earth Engine, SNAP, Python and GIS.
-    </p>
-
-    <a href="https://github.com/oldache-oussamanazim/marine-pollution-algiers"
-       target="_blank">
-        View project on GitHub →
-    </a>
-
-</div>
-        
         <div class="project">
-
-    <h3>Coastal Engineering Modelling</h3>
-
-    <p>
-        Numerical modelling projects focused on waves,
-        hydrodynamics, sediment transport and coastal processes.
-    </p>
-
-    <p>
-        <strong>Applications:</strong>
-        Wave propagation, sediment dynamics and coastal-process analysis.
-    </p>
-
-    <p>
-        <strong>Tools:</strong>
-        SWAN, Delft3D, GIS, Python and MATLAB.
-    </p>
-
-    <a href="https://github.com/oldache-oussamanazim/coastal-engineering-modelling"
-       target="_blank">
-        View project on GitHub →
-    </a>
-
-</div>
+            <div>
+                <h3><i class="fa-solid fa-map"></i> Tigzirt Coastal Assessment</h3>
+                <p>
+                    Field report and geospatial assessment of the coastal zone in Tigzirt, featuring total station topographic surveys, gabion and coastal protection evaluations, and Google Earth shoreline tracking.
+                </p>
+                <p><strong>Tools:</strong> Topcon GM-52, AutoCAD, Google Earth, QGIS, GIS.</p>
+            </div>
+            <a href="https://github.com/oldache-oussamanazim/tigzirt-coastal-assessment" target="_blank">
+                View project on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
 
         <div class="project">
+            <div>
+                <h3><i class="fa-solid fa-water"></i> Satellite-Derived Bathymetry</h3>
+                <p>
+                    Sentinel-2 based bathymetric mapping in shallow coastal waters evaluating empirical ratio models and Random Forest regression algorithms.
+                </p>
+                <p><strong>Tools:</strong> Sentinel-2, Google Earth Engine, Python, QGIS.</p>
+            </div>
+            <a href="https://github.com/oldache-oussamanazim/satellite-derived-bathymetry" target="_blank">
+                View project on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
 
-    <h3>Coastal Change & GIS</h3>
+        <div class="project">
+            <div>
+                <h3><i class="fa-solid fa-flask"></i> Marine Pollution — Bay of Algiers</h3>
+                <p>
+                    Coupled analysis of in situ water quality parameters and Sentinel-2 optical remote sensing to assess marine pollution trends in the Bay of Algiers.
+                </p>
+                <p><strong>Tools:</strong> Sentinel-2, SNAP, Google Earth Engine, Python, GIS.</p>
+            </div>
+            <a href="https://github.com/oldache-oussamanazim/marine-pollution-algiers" target="_blank">
+                View project on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
 
-    <p>
-        GIS-based analysis of shoreline evolution and spatial
-        changes in coastal environments.
-    </p>
-
-    <p>
-        <strong>Methods:</strong>
-        Geospatial analysis, shoreline mapping and remote-sensing
-        based coastal assessment.
-    </p>
-
-    <p>
-        <strong>Tools:</strong>
-        ArcGIS Pro, QGIS, Sentinel-2 and geospatial data processing.
-    </p>
-
-    <a href="https://github.com/oldache-oussamanazim/coastal-change-gis"
-       target="_blank">
-        View project on GitHub →
-    </a>
-
-</div>
-
+        <div class="project">
+            <div>
+                <h3><i class="fa-solid fa-wave-square"></i> Coastal Engineering Modelling</h3>
+                <p>
+                    Numerical simulations evaluating wave propagation, coastal hydrodynamics, and sediment dynamics in nearshore environments.
+                </p>
+                <p><strong>Tools:</strong> SWAN, Delft3D, GIS, Python, MATLAB.</p>
+            </div>
+            <a href="https://github.com/oldache-oussamanazim/coastal-engineering-modelling" target="_blank">
+                View project on GitHub <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
     </div>
-
 </section>
 
 <section id="contact" class="contact">
-
     <div class="contact-inner">
-
         <h2>Contact</h2>
-
         <p>
-            I am currently open to professional opportunities in
-            marine geosciences, coastal engineering, GIS, remote sensing
-            and marine environmental analysis.
+            Feel free to reach out for research collaborations, engineering projects, or professional opportunities in coastal engineering, marine geosciences, hydrography, and remote sensing.
         </p>
-
         <div class="contact-links">
-
-            <a href="mailto:oldache.oussamanazim@gmail.com">
-                📧 Email
-            </a>
-
-            <a href="https://www.linkedin.com/in/oldache-oussama-nazim-4210b6266"
-               target="_blank">
-                💼 LinkedIn
-            </a>
-
-            <a href="https://github.com/oldache-oussamanazim"
-               target="_blank">
-                💻 GitHub
-            </a>
-
+            <a href="mailto:oldache.oussamanazim@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
+            <a href="https://www.linkedin.com/in/oldache-oussama-nazim-4210b6266" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/oldache-oussamanazim" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
         </div>
-
     </div>
-
 </section>
 
 <footer>
@@ -793,4 +669,4 @@ body {
 </footer>
 
 </body>
-  </html>
+</html>
