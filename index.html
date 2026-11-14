@@ -14,6 +14,160 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
+  /* Aerial / Satellite Map Styling */
+.aerial-map-box {
+  background: #07131d;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(10, 34, 54, 0.08);
+}
+
+.satellite-viewport {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  /* Simulated high-resolution dark satellite raster background with subtle coastal texture */
+  background: linear-gradient(135deg, #061524 0%, #0b2538 40%, #12364c 100%);
+  background-image: 
+    radial-gradient(circle at 30% 40%, rgba(27, 127, 140, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 75% 60%, rgba(13, 59, 84, 0.4) 0%, transparent 50%),
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Simulated coastline geographic contour line on the satellite map */
+.satellite-viewport::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 900 420' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,180 C150,160 300,190 450,170 C600,150 750,110 900,130 L900,420 L0,420 Z' fill='%230f202d' opacity='0.85'/%3E%3Cpath d='M0,180 C150,160 300,190 450,170 C600,150 750,110 900,130' fill='none' stroke='%231b7f8c' stroke-width='1.5' opacity='0.6'/%3E%3C/svg%3E") no-repeat center/cover;
+  pointer-events: none;
+}
+
+.map-pins {
+  position: absolute;
+  inset: 0;
+}
+
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  z-index: 5;
+}
+
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--buoy);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(240, 169, 59, 0.8);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--buoy);
+  border-radius: 50%;
+  top: -7px;
+  left: -7px;
+  animation: pulse-ring 2s infinite;
+  opacity: 0.7;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.pin-label {
+  background: rgba(10, 34, 54, 0.85);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.map-pin:hover .pin-dot {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+.map-pin:hover .pin-label {
+  background: var(--sea);
+  border-color: #fff;
+}
+
+/* HUD Overlay Elements */
+.map-hud-top {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+}
+
+.map-hud-bottom {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.scale-bar {
+  width: 100px;
+  height: 6px;
+  border-left: 2px solid rgba(255,255,255,0.7);
+  border-right: 2px solid rgba(255,255,255,0.7);
+  border-bottom: 2px solid rgba(255,255,255,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 10px;
+  color: rgba(255,255,255,0.8);
+  padding-bottom: 2px;
+}
+
+.north-arrow {
+  background: rgba(10, 34, 54, 0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.aerial-map-box figcaption {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: var(--mute);
+  background: #fff;
+  border-top: 1px solid var(--line);
+}
 :root{--ink:#0a2236;--deep:#0d3b54;--sea:#1b7f8c;--foam:#dff0f1;--paper:#f3f6f6;--line:#d3e0e2;--buoy:#f0a93b;--text:#1f3342;--mute:#5b7080;
 --serif:'Newsreader',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -177,20 +331,58 @@ section{padding:60px 0}
   <div class="wrap">
     <h2>Where I work</h2>
     <p class="lead">Applied studies along the Algerian coast, from the Bay of Algiers to the Kabylie shore, plus field placements inland.</p>
-    <figure class="mapbox">
-      <svg viewBox="0 0 900 300" role="img" aria-label="Schematic map of study sites along the Algerian coast">
-        <rect width="900" height="300" fill="#cfeaec"/>
-        <path d="M0,150C100,130 180,120 260,135C330,148 360,110 430,112C520,115 560,150 640,140C740,128 820,90 900,95L900,300L0,300Z" fill="#efe9da" stroke="#b9ad8e" stroke-width="2"/>
-        <g fill="none" stroke="#9fd3d8" stroke-width="1.5"><path d="M0,120C100,100 180,92 260,106C330,118 360,82 430,84C520,86 560,120 640,110C740,98 820,62 900,67"/><path d="M0,92C100,72 180,64 260,78C330,90 360,54 430,56C520,58 560,92 640,82C740,70 820,34 900,39" opacity=".6"/></g>
-        <g class="pin"><a href="#shoreline"><circle cx="165" cy="128" r="8"/><text x="180" y="116">Sidi Fredj–Douaouda</text></a></g>
-        <g class="pin"><a href="#pollution"><circle cx="330" cy="140" r="8"/><text x="344" y="170">Bay of Algiers</text></a></g>
-        <g class="pin"><a href="#sdb"><circle cx="395" cy="118" r="8"/><text x="408" y="100">Plage des Sablettes</text></a></g>
-        <g class="pin"><a href="#tigzirt"><circle cx="720" cy="127" r="8"/><text x="624" y="100">Tigzirt</text></a></g>
-        <g class="pin"><a href="#background"><circle cx="520" cy="245" r="8"/><text x="534" y="250">Bou Saâda (field placement)</text></a></g>
-        <text x="20" y="285" font-size="12" fill="#6a6450" font-family="sans-serif">Schematic, not to scale</text>
-      </svg>
-      <figcaption>Click a pin to jump to its project. North is up; the Mediterranean is at the top.</figcaption>
-    </figure>
+    
+    <div class="aerial-map-box">
+      <!-- Aerial / Satellite Map Canvas Layer -->
+      <div class="satellite-viewport">
+        <div class="map-overlay-grid"></div>
+        
+        <!-- Interactive Study Site Markers -->
+        <div class="map-pins">
+          <a href="#shoreline" class="map-pin" style="top: 48%; left: 22%;" title="Sidi Fredj–Douaouda">
+            <span class="pulse-ring"></span>
+            <span class="pin-dot"></span>
+            <span class="pin-label">Sidi Fredj–Douaouda</span>
+          </a>
+          
+          <a href="#pollution" class="map-pin" style="top: 58%; left: 42%;" title="Bay of Algiers">
+            <span class="pulse-ring"></span>
+            <span class="pin-dot"></span>
+            <span class="pin-label">Bay of Algiers</span>
+          </a>
+          
+          <a href="#sdb" class="map-pin" style="top: 42%; left: 48%;" title="Plage des Sablettes">
+            <span class="pulse-ring"></span>
+            <span class="pin-dot"></span>
+            <span class="pin-label">Plage des Sablettes</span>
+          </a>
+          
+          <a href="#tigzirt" class="map-pin" style="top: 38%; left: 78%;" title="Tigzirt">
+            <span class="pulse-ring"></span>
+            <span class="pin-dot"></span>
+            <span class="pin-label">Tigzirt</span>
+          </a>
+          
+          <a href="#background" class="map-pin inland" style="top: 78%; left: 58%;" title="Bou Saâda (field placement)">
+            <span class="pulse-ring"></span>
+            <span class="pin-dot"></span>
+            <span class="pin-label">Bou Saâda (Inland Field)</span>
+          </a>
+        </div>
+
+        <!-- GIS HUD Elements (Scale, Coordinates, North Arrow) -->
+        <div class="map-hud-top">
+          <span class="coords"><i class="fa-solid fa-crosshairs"></i> 36°46'N 3°03'E</span>
+          <span class="provider">Esri / Sentinel-2 Imagery Base</span>
+        </div>
+        <div class="map-hud-bottom">
+          <div class="scale-bar"><span>20 km</span></div>
+          <div class="north-arrow">N <i class="fa-solid fa-arrow-up"></i></div>
+        </div>
+      </div>
+      
+      <figcaption><i class="fa-solid fa-circle-info" style="color: var(--sea);"></i> Interactive study area overview along the Mediterranean coastline. Click any marker to jump directly to its project details.</figcaption>
+    </div>
   </div>
 </section>
 
