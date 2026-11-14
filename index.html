@@ -13,7 +13,68 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,700&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <style>
+    .aerial-map-box {
+  background: #07131d;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(10, 34, 54, 0.08);
+}
+
+.aerial-map-box figcaption {
+  padding: 12px 18px;
+  font-size: 13px;
+  color: var(--mute);
+  background: #fff;
+  border-top: 1px solid var(--line);
+}
+
+/* Custom Leaflet Pulsing Marker */
+.custom-gis-pin {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.custom-gis-pin .pin-dot {
+  width: 14px;
+  height: 14px;
+  background: var(--buoy);
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  flex-shrink: 0;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.custom-gis-pin:hover .pin-dot {
+  background: #fff;
+  transform: scale(1.25);
+}
+
+.custom-gis-pin .pin-label {
+  background: rgba(10, 34, 54, 0.88);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  padding: 3px 9px;
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.custom-gis-pin:hover .pin-label {
+  background: var(--sea);
+  border-color: #fff;
+}
   /* Aerial / Satellite Map Styling */
 .aerial-map-box {
   background: #07131d;
@@ -333,55 +394,10 @@ section{padding:60px 0}
     <p class="lead">Applied studies along the Algerian coast, from the Bay of Algiers to the Kabylie shore, plus field placements inland.</p>
     
     <div class="aerial-map-box">
-      <!-- Aerial / Satellite Map Canvas Layer -->
-      <div class="satellite-viewport">
-        <div class="map-overlay-grid"></div>
-        
-        <!-- Interactive Study Site Markers -->
-        <div class="map-pins">
-          <a href="#shoreline" class="map-pin" style="top: 48%; left: 22%;" title="Sidi Fredj–Douaouda">
-            <span class="pulse-ring"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-label">Sidi Fredj–Douaouda</span>
-          </a>
-          
-          <a href="#pollution" class="map-pin" style="top: 58%; left: 42%;" title="Bay of Algiers">
-            <span class="pulse-ring"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-label">Bay of Algiers</span>
-          </a>
-          
-          <a href="#sdb" class="map-pin" style="top: 42%; left: 48%;" title="Plage des Sablettes">
-            <span class="pulse-ring"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-label">Plage des Sablettes</span>
-          </a>
-          
-          <a href="#tigzirt" class="map-pin" style="top: 38%; left: 78%;" title="Tigzirt">
-            <span class="pulse-ring"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-label">Tigzirt</span>
-          </a>
-          
-          <a href="#background" class="map-pin inland" style="top: 78%; left: 58%;" title="Bou Saâda (field placement)">
-            <span class="pulse-ring"></span>
-            <span class="pin-dot"></span>
-            <span class="pin-label">Bou Saâda (Inland Field)</span>
-          </a>
-        </div>
-
-        <!-- GIS HUD Elements (Scale, Coordinates, North Arrow) -->
-        <div class="map-hud-top">
-          <span class="coords"><i class="fa-solid fa-crosshairs"></i> 36°46'N 3°03'E</span>
-          <span class="provider">Esri / Sentinel-2 Imagery Base</span>
-        </div>
-        <div class="map-hud-bottom">
-          <div class="scale-bar"><span>20 km</span></div>
-          <div class="north-arrow">N <i class="fa-solid fa-arrow-up"></i></div>
-        </div>
-      </div>
-      
-      <figcaption><i class="fa-solid fa-circle-info" style="color: var(--sea);"></i> Interactive study area overview along the Mediterranean coastline. Click any marker to jump directly to its project details.</figcaption>
+      <div id="real-satellite-map" style="width: 100%; height: 440px; z-index: 1;"></div>
+      <figcaption>
+        <i class="fa-solid fa-satellite" style="color: var(--sea);"></i> Real satellite imagery (Esri World Imagery). Click any pin to jump to its project, or zoom/pan to explore the coastline.
+      </figcaption>
     </div>
   </div>
 </section>
@@ -539,5 +555,54 @@ section{padding:60px 0}
 </main>
 
 <footer>© 2026 Oldache Oussama Nazim · Marine Geosciences & Coastal Engineering</footer>
+  <script>
+  // Initialize map framed to show Algiers, Tigzirt, and Bou Saâda
+  const map = L.map('real-satellite-map', {
+    center: [36.15, 3.65],
+    zoom: 8,
+    scrollWheelZoom: false // Prevents accidental zooming while scrolling down the page
+  });
+
+  // Load real Esri World Imagery (Satellite)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri — Source: Esri, Maxar, Earthstar Geographics',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Add subtle coastline/boundary labels overlay (optional, keeps real satellite look)
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+    opacity: 0.65
+  }).addTo(map);
+
+  // Real geographic coordinates [Lat, Lng] for your 5 sites
+  const sites = [
+    { name: "Sidi Fredj–Douaouda", coords: [36.745, 2.815], target: "#shoreline" },
+    { name: "Bay of Algiers", coords: [36.775, 3.120], target: "#pollution" },
+    { name: "Plage des Sablettes", coords: [36.742, 3.088], target: "#sdb" },
+    { name: "Tigzirt", coords: [36.893, 4.122], target: "#tigzirt" },
+    { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background" }
+  ];
+
+  sites.forEach(site => {
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="custom-gis-pin">
+               <span class="pin-dot"></span>
+               <span class="pin-label">${site.name}</span>
+             </div>`,
+      iconSize: [160, 24],
+      iconAnchor: [7, 12]
+    });
+
+    const marker = L.marker(site.coords, { icon: icon }).addTo(map);
+    marker.on('click', () => {
+      const section = document.querySelector(site.target);
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Add metric scale bar
+  L.control.scale({ imperial: false, position: 'bottomleft' }).addTo(map);
+</script>
 </body>
 </html>
