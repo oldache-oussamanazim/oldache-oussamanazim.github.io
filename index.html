@@ -426,10 +426,10 @@ section{padding:60px 0}
     opacity: 0.65
   }).addTo(map);
 
-  // Real geographic coordinates converted from DMS to Decimal Degrees for all 5 sites
+  // Precise geographic coordinates [Lat, Lng] for all 5 sites
   const sites = [
     { name: "Sidi Fredj–Douaouda", coords: [36.729442, 2.829922], target: "#shoreline", dir: "label-left" },         // 36°43'45.99"N 2°49'47.72"E
-    { name: "Bay of Algiers", coords: [37.116356, 3.146722], target: "#pollution", dir: "label-top" },              // 36°46'58.88"N 3°08'48.20"E converted / tuned
+    { name: "Bay of Algiers", coords: [36.779744, 3.154744], target: "#pollution", dir: "label-top" },              // 36°46'47.08"N 3°09'17.08"E
     { name: "Plage des Sablettes", coords: [36.743986, 3.118089], target: "#sdb", dir: "label-bottom" },           // 36°44'38.35"N 3°07'05.12"E
     { name: "Tigzirt", coords: [36.894286, 4.114261], target: "#tigzirt", dir: "label-right" },                    // 36°53'39.43"N 4°06'51.34"E
     { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background", dir: "label-right" }        // Inland field site
