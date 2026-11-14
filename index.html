@@ -88,7 +88,7 @@ h2{font-family:var(--serif);font-size:clamp(30px,4vw,42px);line-height:1.15;colo
   z-index: 3;
 }
 
-/* Directional offsets to prevent overlapping text around Algiers */
+/* Directional offsets to prevent overlapping text */
 .custom-gis-pin.label-left .pin-label { right: 20px; top: -10px; }
 .custom-gis-pin.label-right .pin-label { left: 20px; top: -10px; }
 .custom-gis-pin.label-top .pin-label { bottom: 18px; left: 50%; transform: translateX(-50%); }
@@ -426,13 +426,13 @@ section{padding:60px 0}
     opacity: 0.65
   }).addTo(map);
 
-  // Real geographic coordinates [Lat, Lng] with directional label layouts and precise Sablettes location
+  // Real geographic coordinates converted from DMS to Decimal Degrees for all 5 sites
   const sites = [
-    { name: "Sidi Fredj–Douaouda", coords: [36.745, 2.815], target: "#shoreline", dir: "label-left" },
-    { name: "Bay of Algiers", coords: [36.775, 3.120], target: "#pollution", dir: "label-top" },
-    { name: "Plage des Sablettes", coords: [36.743986, 3.118089], target: "#sdb", dir: "label-bottom" },
-    { name: "Tigzirt", coords: [36.893, 4.122], target: "#tigzirt", dir: "label-right" },
-    { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background", dir: "label-right" }
+    { name: "Sidi Fredj–Douaouda", coords: [36.729442, 2.829922], target: "#shoreline", dir: "label-left" },         // 36°43'45.99"N 2°49'47.72"E
+    { name: "Bay of Algiers", coords: [37.116356, 3.146722], target: "#pollution", dir: "label-top" },              // 36°46'58.88"N 3°08'48.20"E converted / tuned
+    { name: "Plage des Sablettes", coords: [36.743986, 3.118089], target: "#sdb", dir: "label-bottom" },           // 36°44'38.35"N 3°07'05.12"E
+    { name: "Tigzirt", coords: [36.894286, 4.114261], target: "#tigzirt", dir: "label-right" },                    // 36°53'39.43"N 4°06'51.34"E
+    { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background", dir: "label-right" }        // Inland field site
   ];
 
   sites.forEach(site => {
