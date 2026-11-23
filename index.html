@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  
+
 <style>
 :root{--ink:#0a2236;--deep:#0d3b54;--sea:#1b7f8c;--foam:#dff0f1;--paper:#f3f6f6;--line:#d3e0e2;--buoy:#f0a93b;--text:#1f3342;--mute:#5b7080;
 --serif:'Newsreader',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
@@ -23,7 +23,7 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--paper);color:var(--text);line-height:1.65}
 a{color:inherit}
-a:focus-visible{outline:3px solid var(--buoy);outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--buoy);outline-offset:3px}
 .wrap{max-width:1160px;margin:auto;padding:0 24px}
 section{padding:88px 0;scroll-margin-top:56px}
 h2{font-family:var(--serif);font-size:clamp(30px,4vw,42px);line-height:1.15;color:var(--ink);margin-bottom:12px}
@@ -126,7 +126,7 @@ nav ul a:hover{color:var(--sea)}
 .hero .sub{font-family:var(--serif);font-size:clamp(20px,2.6vw,28px);max-width:620px;color:#d6edef;margin-bottom:18px;line-height:1.3}
 .hero .open{max-width:560px;color:#b8d4d8;font-size:16px;margin-bottom:32px}
 .btns{display:flex;flex-wrap:wrap;gap:12px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,.35);color:#fff;transition:background .2s}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:6px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid rgba(255,255,255,.35);color:#fff;transition:background .2s;cursor:pointer}
 .btn:hover{background:rgba(255,255,255,.12)}
 .btn.main{background:var(--buoy);border-color:var(--buoy);color:var(--ink)}
 .btn.main:hover{background:#f5b95c}
@@ -169,15 +169,195 @@ nav ul a:hover{color:var(--sea)}
 .band ul{list-style:none;font-size:15px}
 .band li{padding:2px 0}
 
-/* education */
+/* education & clickable certifications */
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
 .tl{border-left:3px solid var(--sea);padding-left:24px}
 .tl .it{position:relative;margin-bottom:26px}
 .tl .it::before{content:"";position:absolute;left:-32px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--buoy);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--sea)}
 .tl b{color:var(--ink)}.tl small{display:block;color:var(--mute);font-size:14px}
+
+.cert-btn{
+  display:block;
+  width:100%;
+  text-align:left;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:10px 14px;
+  font-family:inherit;
+  font-size:inherit;
+  color:inherit;
+  cursor:pointer;
+  transition:border-color .2s,box-shadow .2s,transform .15s;
+}
+.cert-btn:hover{
+  border-color:var(--sea);
+  box-shadow:0 4px 14px rgba(10,34,54,.08);
+  transform:translateY(-1px);
+}
+.cert-btn .cert-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+.cert-btn b{
+  display:block;
+  font-size:15px;
+  line-height:1.35;
+}
+.cert-badge{
+  flex-shrink:0;
+  font-size:12px;
+  font-weight:600;
+  color:var(--sea);
+  background:var(--foam);
+  padding:2px 8px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+.cert-btn.is-pending .cert-badge{
+  color:var(--mute);
+  background:var(--paper);
+}
+
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .chips span{background:#fff;border:1px solid var(--line);border-radius:20px;padding:4px 13px;font-size:14px}
 h4{font-family:var(--serif);font-size:22px;color:var(--ink);margin:0 0 12px}
+
+/* Certificate Modal */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  z-index:200;
+  background:rgba(7,26,43,.72);
+  backdrop-filter:blur(4px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal-backdrop.is-open{display:flex}
+.modal-card{
+  background:#fff;
+  color:var(--text);
+  width:100%;
+  max-width:860px;
+  max-height:90vh;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  display:flex;
+  flex-direction:column;
+  border:1px solid var(--line);
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  padding:16px 20px;
+  background:var(--ink);
+  color:#fff;
+}
+.modal-head h3{
+  font-family:var(--serif);
+  font-size:22px;
+  line-height:1.25;
+  margin-bottom:2px;
+}
+.modal-head p{
+  font-size:13.5px;
+  color:#b8d4d8;
+}
+.modal-close{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+}
+.modal-close:hover{background:rgba(255,255,255,.22)}
+.modal-body{
+  padding:20px;
+  overflow:auto;
+  flex:1;
+  background:var(--paper);
+}
+.cert-frame{
+  width:100%;
+  height:62vh;
+  min-height:360px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+}
+.cert-img{
+  display:block;
+  max-width:100%;
+  max-height:62vh;
+  margin:auto;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:#fff;
+}
+.cert-fallback{
+  background:#fff;
+  border:1px dashed var(--sea);
+  border-radius:10px;
+  padding:28px;
+  text-align:center;
+}
+.cert-fallback i{
+  font-size:32px;
+  color:var(--sea);
+  margin-bottom:10px;
+}
+.cert-fallback h4{
+  margin-bottom:8px;
+}
+.cert-fallback p{
+  color:var(--mute);
+  font-size:14.5px;
+  max-width:520px;
+  margin:0 auto 14px;
+}
+.cert-fallback code{
+  background:var(--foam);
+  color:var(--ink);
+  padding:2px 7px;
+  border-radius:4px;
+  font-size:13px;
+}
+.modal-foot{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:12px 20px;
+  background:#fff;
+  border-top:1px solid var(--line);
+  font-size:13.5px;
+  color:var(--mute);
+}
+.modal-foot a{
+  color:var(--sea);
+  font-weight:600;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+.modal-foot a:hover{text-decoration:underline}
 
 /* contact */
 .contact{background:var(--ink);color:#fff;text-align:left}
@@ -243,7 +423,7 @@ section{padding:60px 0}
   <div class="wrap">
     <h2>Fieldwork & Study Sites</h2>
     <p class="lead">Academic research, thesis study site, and field campaigns along the Algerian coast, from the Bay of Algiers to the Kabylie shore, plus field placements inland.</p>
-    
+
     <div class="aerial-map-box">
       <div id="real-satellite-map" style="width: 100%; height: 440px; z-index: 1;"></div>
       <figcaption>
@@ -260,7 +440,6 @@ section{padding:60px 0}
 
     <article class="proj" id="sdb">
       <figure class="fig">
-        <!-- Replace with your real map: <img src="img/sdb-sablettes.webp" alt="Satellite-derived bathymetry of Plage des Sablettes" width="1200" height="800" loading="lazy"> -->
         <svg class="pal-sea" viewBox="0 0 400 300" role="img" aria-label="Schematic bathymetry map with depth colour scale"><rect width="400" height="300" fill="#eaf6f7"/><use href="#contours"/><g font-family="sans-serif" font-size="10" fill="#0a2236"><rect x="300" y="256" width="14" height="10" fill="#cfeaec"/><rect x="314" y="256" width="14" height="10" fill="#9fd3d8"/><rect x="328" y="256" width="14" height="10" fill="#5db0bb"/><rect x="342" y="256" width="14" height="10" fill="#2d8a99"/><rect x="356" y="256" width="14" height="10" fill="#0d5a70"/><text x="300" y="278">shallow</text><text x="344" y="278">deep</text></g></svg>
         <figcaption>Schematic: depth colour scheme used for bathymetry maps.</figcaption>
       </figure>
@@ -268,7 +447,7 @@ section{padding:60px 0}
         <span class="tag">Research project</span>
         <h3>Satellite-derived bathymetry, Plage des Sablettes</h3>
         <p>A full pipeline from Google Earth Engine image processing to machine learning for shallow-water depth mapping. Stumpf and Lyzenga ratio models are compared with Random Forest regression and validated with spatial block cross-validation.</p>
-        <p class="res">Delivered QGIS maps, an interactive topo-bathymetry viewer and a 19-page report. <!-- Add numbers: best-model RMSE and depth range. --></p>
+        <p class="res">Delivered QGIS maps, an interactive topo-bathymetry viewer and a 19-page report.</p>
         <p class="tools">Sentinel-2 · Google Earth Engine · Python (scikit-learn) · QGIS</p>
         <div class="lnk">
           <a href="viewer/sablettes-viewer.html" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Interactive viewer</a>
@@ -279,7 +458,6 @@ section{padding:60px 0}
 
     <article class="proj flip" id="pollution">
       <figure class="fig">
-        <!-- Replace with your real map: <img src="img/pollution-bay-algiers.webp" alt="Water quality map of the Bay of Algiers" width="1200" height="800" loading="lazy"> -->
         <svg class="pal-poll" viewBox="0 0 400 300" role="img" aria-label="Schematic pollution intensity map"><rect width="400" height="300" fill="#cfeaec"/><use href="#contours" transform="translate(40 20) scale(.85)"/><circle cx="110" cy="210" r="5" fill="#0a2236"/><circle cx="210" cy="90" r="5" fill="#0a2236"/><circle cx="290" cy="190" r="5" fill="#0a2236"/><circle cx="170" cy="160" r="5" fill="#0a2236"/><text x="14" y="288" font-family="sans-serif" font-size="10" fill="#0a2236">● in situ sampling points over a satellite index</text></svg>
         <figcaption>Schematic: satellite water-quality index calibrated with in situ points.</figcaption>
       </figure>
@@ -287,7 +465,7 @@ section{padding:60px 0}
         <span class="tag">Master's thesis</span>
         <h3>Marine pollution in the Bay of Algiers</h3>
         <p>In situ physico-chemical measurements are coupled with Sentinel-2 optical indices to map water quality parameters and the spatial distribution of pollution across the bay.</p>
-        <p class="res">Defended June 2026, mention Très Bien. <!-- Add the key finding or correlation value. --></p>
+        <p class="res">Defended June 2026, mention Très Bien.</p>
         <p class="tools">Sentinel-2 · SNAP · Google Earth Engine · Python · GIS</p>
         <div class="lnk"><a href="https://github.com/oldache-oussamanazim/marine-pollution-algiers" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a></div>
       </div>
@@ -296,7 +474,6 @@ section{padding:60px 0}
     <div class="minis">
       <article class="mini" id="shoreline">
         <figure class="fig" style="border:0;border-radius:0">
-          <!-- Replace with: <img src="img/dsas-shoreline.webp" alt="Shorelines and DSAS transects" loading="lazy"> -->
           <svg viewBox="0 0 400 200" role="img" aria-label="Schematic of shorelines by year with transects"><rect width="400" height="200" fill="#cfeaec"/><path d="M0,200V120C80,100 160,130 240,110C320,92 360,100 400,90V200Z" fill="#efe9da"/><g fill="none" stroke-width="3"><path d="M0,112C80,92 160,122 240,102C320,84 360,92 400,82" stroke="#2d8a99"/><path d="M0,120C80,100 160,130 240,110C320,92 360,100 400,90" stroke="#f0a93b"/><path d="M0,130C80,110 160,140 240,120C320,104 360,110 400,100" stroke="#d9622b"/></g><g stroke="#0a2236" stroke-width="1"><path d="M50,80V150"/><path d="M130,80V150"/><path d="M210,80V150"/><path d="M290,70V140"/><path d="M360,70V140"/></g></svg>
           <figcaption>Schematic: shorelines from different years cut by DSAS transects.</figcaption>
         </figure>
@@ -310,7 +487,6 @@ section{padding:60px 0}
 
       <article class="mini" id="swan">
         <figure class="fig" style="border:0;border-radius:0">
-          <!-- Replace with: <img src="img/swan-wave-height.webp" alt="SWAN significant wave height map" loading="lazy"> -->
           <svg viewBox="0 0 400 200" role="img" aria-label="Schematic of waves refracting toward a headland"><rect width="400" height="200" fill="#eaf6f7"/><g fill="none" stroke="#2d8a99" stroke-width="2"><path d="M0,30C120,30 220,40 300,80"/><path d="M0,70C120,70 210,76 270,100"/><path d="M0,110C120,110 200,112 250,122"/><path d="M0,150C120,150 190,148 240,142"/></g><g fill="none" stroke="#0d5a70" stroke-width="1" opacity=".5"><path d="M60,0C70,60 120,140 200,200"/><path d="M160,0C170,50 230,110 320,170"/></g><path d="M400,200V70C340,70 300,100 300,125C300,160 340,170 400,170Z" fill="#efe9da"/></svg>
           <figcaption>Schematic: wave crests refracting toward a headland.</figcaption>
         </figure>
@@ -325,7 +501,6 @@ section{padding:60px 0}
 
       <article class="mini" id="tigzirt">
         <figure class="fig" style="border:0;border-radius:0">
-          <!-- Replace with a field photo: <img src="img/tigzirt-field.webp" alt="Total station survey at Tigzirt" loading="lazy"> -->
           <svg viewBox="0 0 400 200" role="img" aria-label="Schematic of a gabion structure and a total station"><rect width="400" height="200" fill="#cfeaec"/><path d="M0,200V130C100,125 250,140 400,120V200Z" fill="#efe9da"/><g fill="#8a7f5e" stroke="#5b5238"><rect x="120" y="112" width="30" height="20"/><rect x="150" y="112" width="30" height="20"/><rect x="180" y="112" width="30" height="20"/><rect x="210" y="112" width="30" height="20"/><rect x="135" y="92" width="30" height="20"/><rect x="165" y="92" width="30" height="20"/><rect x="195" y="92" width="30" height="20"/></g><path d="M310,170L322,130L334,170Z" fill="#0a2236"/><rect x="314" y="120" width="16" height="12" fill="#0a2236"/><path d="M314,126L240,115" stroke="#d9622b" stroke-dasharray="4 4" stroke-width="2"/></svg>
           <figcaption>Schematic: a total station measuring a gabion structure.</figcaption>
         </figure>
@@ -382,12 +557,47 @@ section{padding:60px 0}
     <div>
       <h4>Certifications</h4>
       <div class="tl">
-        <div class="it"><b>TechGeo Geospatial Certification Exam, 100% (40/40)</b><small>October 2026</small></div>
-        <div class="it"><b>Copernicus Marine Toolbox, Ocean Sessions</b><small>November 2026</small></div>
-        <div class="it"><b>Copernicus Arctic Hub: Data and Tools</b><small>September 2026</small></div>.
-        <div class="it"><b>The Power of Where: Communicating with Maps - MOOC</b><small>in progress</small></div>
+        <div class="it">
+          <button type="button" class="cert-btn" data-cert="techgeo">
+            <span class="cert-top">
+              <b>TechGeo Geospatial Certification Exam, 100% (40/40)</b>
+              <span class="cert-badge"><i class="fa-solid fa-award" aria-hidden="true"></i> Certificate</span>
+            </span>
+            <small>October 2026</small>
+          </button>
+        </div>
 
+        <div class="it">
+          <button type="button" class="cert-btn" data-cert="copernicus-marine">
+            <span class="cert-top">
+              <b>Copernicus Marine Toolbox, Ocean Sessions</b>
+              <span class="cert-badge"><i class="fa-solid fa-award" aria-hidden="true"></i> Certificate</span>
+            </span>
+            <small>November 2026</small>
+          </button>
+        </div>
+
+        <div class="it">
+          <button type="button" class="cert-btn" data-cert="copernicus-arctic">
+            <span class="cert-top">
+              <b>Copernicus Arctic Hub: Data and Tools</b>
+              <span class="cert-badge"><i class="fa-solid fa-award" aria-hidden="true"></i> Certificate</span>
+            </span>
+            <small>September 2026</small>
+          </button>
+        </div>
+
+        <div class="it">
+          <button type="button" class="cert-btn is-pending" data-cert="esri-mooc">
+            <span class="cert-top">
+              <b>The Power of Where: Communicating with Maps - MOOC</b>
+              <span class="cert-badge"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> In progress</span>
+            </span>
+            <small>In progress</small>
+          </button>
+        </div>
       </div>
+
       <h4 style="margin-top:8px">Languages</h4>
       <div class="chips"><span>Arabic: native</span><span>French: B2</span><span>English: B2</span></div>
     </div>
@@ -407,14 +617,158 @@ section{padding:60px 0}
 </section>
 </main>
 
+<!-- Certificate Viewer Modal -->
+<div class="modal-backdrop" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title" hidden>
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <h3 id="cert-modal-title">Certificate</h3>
+        <p id="cert-modal-meta"></p>
+      </div>
+      <button type="button" class="modal-close" id="cert-modal-close" aria-label="Close certificate viewer">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="modal-body" id="cert-modal-body"></div>
+    <div class="modal-foot">
+      <span id="cert-modal-note"></span>
+      <a id="cert-modal-external" href="#" target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-up-right-from-square" aria-hidden="true"></i> Open file in new tab
+      </a>
+    </div>
+  </div>
+</div>
+
 <footer>© 2026 Oldache Oussama Nazim · Marine Geosciences & Coastal Engineering</footer>
 
 <script>
+  // Update these file paths to match your actual certificate PDFs or images (e.g., certs/techgeo-2026.pdf or certs/techgeo-2026.webp)
+  const CERTIFICATES = {
+    techgeo: {
+      title: "TechGeo Geospatial Certification Exam, 100% (40/40)",
+      meta: "Issued October 2026 · Score: 40/40 (100%)",
+      file: "certs/techgeo-certification-2026.pdf",
+      status: "completed"
+    },
+    "copernicus-marine": {
+      title: "Copernicus Marine Toolbox, Ocean Sessions",
+      meta: "Issued November 2026 · Copernicus Marine Service",
+      file: "certs/copernicus-marine-toolbox-2026.pdf",
+      status: "completed"
+    },
+    "copernicus-arctic": {
+      title: "Copernicus Arctic Hub: Data and Tools",
+      meta: "Issued September 2026 · Copernicus",
+      file: "certs/copernicus-arctic-hub-2026.pdf",
+      status: "completed"
+    },
+    "esri-mooc": {
+      title: "The Power of Where: Communicating with Maps - MOOC",
+      meta: "Esri Training · Currently in progress",
+      file: "certs/esri-power-of-where.pdf",
+      status: "in-progress"
+    }
+  };
+
+  const modal = document.getElementById("cert-modal");
+  const modalTitle = document.getElementById("cert-modal-title");
+  const modalMeta = document.getElementById("cert-modal-meta");
+  const modalBody = document.getElementById("cert-modal-body");
+  const modalNote = document.getElementById("cert-modal-note");
+  const modalExternal = document.getElementById("cert-modal-external");
+  const modalClose = document.getElementById("cert-modal-close");
+  let lastFocusedBtn = null;
+
+  function renderCertificatePreview(cert) {
+    if (cert.status === "in-progress") {
+      modalExternal.style.display = "none";
+      modalNote.textContent = "Certification currently in progress — certificate will be uploaded upon completion.";
+      modalBody.innerHTML = `
+        <div class="cert-fallback">
+          <i class="fa-solid fa-hourglass-half" aria-hidden="true"></i>
+          <h4>Course In Progress</h4>
+          <p>You are currently completing <strong>${cert.title}</strong>. Once finished, place your certificate file at <code>${cert.file}</code> and update its status to <code>"completed"</code> in <code>CERTIFICATES</code>.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const ext = cert.file.split(".").pop().toLowerCase();
+    const isImage = ["png", "jpg", "jpeg", "webp", "gif"].includes(ext);
+
+    modalExternal.href = cert.file;
+    modalExternal.style.display = "inline-flex";
+    modalNote.textContent = `Source: ${cert.file}`;
+
+    if (isImage) {
+      modalBody.innerHTML = `
+        <img class="cert-img" src="${cert.file}" alt="${cert.title}" onerror="this.replaceWith(buildMissingFileNode('${cert.file}'))" />
+      `;
+    } else {
+      modalBody.innerHTML = `
+        <iframe class="cert-frame" src="${cert.file}#view=FitH" title="${cert.title}"></iframe>
+        <div class="cert-fallback" style="margin-top:14px">
+          <p>If the embedded PDF does not display in your browser, use the link below or add your file at <code>${cert.file}</code>.</p>
+        </div>
+      `;
+    }
+  }
+
+  function buildMissingFileNode(filePath) {
+    const div = document.createElement("div");
+    div.className = "cert-fallback";
+    div.innerHTML = `
+      <i class="fa-solid fa-file-circle-question" aria-hidden="true"></i>
+      <h4>Certificate File Not Found Yet</h4>
+      <p>Upload your certificate to <code>${filePath}</code> (or update the path in <code>CERTIFICATES</code> inside the script) so visitors can view it here.</p>
+    `;
+    return div;
+  }
+
+  function openCertModal(certKey, triggerEl) {
+    const cert = CERTIFICATES[certKey];
+    if (!cert) return;
+
+    lastFocusedBtn = triggerEl || document.activeElement;
+    modalTitle.textContent = cert.title;
+    modalMeta.textContent = cert.meta;
+    renderCertificatePreview(cert);
+
+    modal.hidden = false;
+    requestAnimationFrame(() => modal.classList.add("is-open"));
+    document.body.style.overflow = "hidden";
+    modalClose.focus();
+  }
+
+  function closeCertModal() {
+    modal.classList.remove("is-open");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      modal.hidden = true;
+      modalBody.innerHTML = "";
+      if (lastFocusedBtn) lastFocusedBtn.focus();
+    }, 150);
+  }
+
+  document.querySelectorAll(".cert-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      openCertModal(btn.dataset.cert, btn);
+    });
+  });
+
+  modalClose.addEventListener("click", closeCertModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeCertModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.hidden) closeCertModal();
+  });
+
   // Initialize map to show the whole region from Algiers down to Bou Saâda without overlap
   const map = L.map('real-satellite-map', {
     center: [36.10, 3.65],
     zoom: 7.6,
-    scrollWheelZoom: false // Prevents accidental zooming while scrolling down the page
+    scrollWheelZoom: false
   });
 
   // Load real Esri World Imagery (Satellite)
@@ -430,11 +784,11 @@ section{padding:60px 0}
 
   // Precise geographic coordinates [Lat, Lng] for all 5 sites
   const sites = [
-    { name: "Sidi Fredj–Douaouda", coords: [36.729442, 2.829922], target: "#shoreline", dir: "label-left" },         // 36°43'45.99"N 2°49'47.72"E
-    { name: "Bay of Algiers", coords: [36.779744, 3.154744], target: "#pollution", dir: "label-top" },              // 36°46'47.08"N 3°09'17.08"E
-    { name: "Plage des Sablettes", coords: [36.743986, 3.118089], target: "#sdb", dir: "label-bottom" },           // 36°44'38.35"N 3°07'05.12"E
-    { name: "Tigzirt", coords: [36.894286, 4.114261], target: "#tigzirt", dir: "label-right" },                    // 36°53'39.43"N 4°06'51.34"E
-    { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background", dir: "label-right" }        // Inland field site
+    { name: "Sidi Fredj–Douaouda", coords: [36.729442, 2.829922], target: "#shoreline", dir: "label-left" },
+    { name: "Bay of Algiers", coords: [36.779744, 3.154744], target: "#pollution", dir: "label-top" },
+    { name: "Plage des Sablettes", coords: [36.743986, 3.118089], target: "#sdb", dir: "label-bottom" },
+    { name: "Tigzirt", coords: [36.894286, 4.114261], target: "#tigzirt", dir: "label-right" },
+    { name: "Bou Saâda (Inland Field)", coords: [35.215, 4.180], target: "#background", dir: "label-right" }
   ];
 
   sites.forEach(site => {
